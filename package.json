@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "name": "my-recipe-book",
+  "scripts": {
+    "front": "yarn workspace front dev",
+    "back": "yarn workspace back dev",
+    "dev": "concurrently --kill-others-on-fail \"yarn back\"  \"yarn front\""
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "concurrently": "4.1.0"
+  }
+}
