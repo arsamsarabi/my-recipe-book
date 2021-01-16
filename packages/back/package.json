@@ -19,7 +19,8 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
     "mongoose": "^5.11.12",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "pug": "^3.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

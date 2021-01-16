@@ -1,0 +1,6 @@
+{
+  "mail": {
+    "password": "MAIL_PASSWORD"
+  },
+  "jwtPrivateKey": "JWT_SECRET"
+}
