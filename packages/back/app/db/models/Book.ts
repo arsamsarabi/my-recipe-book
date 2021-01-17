@@ -8,8 +8,8 @@ export interface BookInterface {
 }
 
 export interface BookDocument extends BookInterface, Document {
-  recipes: Types.Array<string>
-  users: Types.Array<string>
+  recipes?: Types.Array<string>
+  users?: Types.Array<string>
   creator: string
 }
 

@@ -2,24 +2,25 @@ import express, { Request, Response } from 'express'
 
 import { apiDebugger as log } from '../../utils/debuggers'
 import controller from './controller'
-import { validateBook } from './middlewares'
+import { validateNew, validateUpdate } from './middlewares'
 
 const router = express.Router()
 
 router.get('/', async (req: Request, res: Response) => {
-  const userId = req.params.userId
-  const ingredients = await controller.getBooks(userId)
-  res.send(ingredients)
+  const userId = req.user?._id || ''
+  const books = await controller.getBooks(userId)
+  return res.status(200).send({
+    ok: true,
+    data: books,
+    message: books.length
+      ? 'Books successfully fetched!'
+      : 'No Books recorded!',
+  })
 })
 
-router.post('/', [validateBook], async (req: Request, res: Response) => {
-  const { title, image, description, userId } = req.params
+router.post('/', [validateNew], async (req: Request, res: Response) => {
   try {
-    const result = await controller.addBook(userId, {
-      title,
-      image,
-      description,
-    })
+    const result = await controller.addBook(req.user?._id as string, req.body)
     return res.status(200).send(`Book ${result.title} added!`)
   } catch (error) {
     log(error.message)
@@ -27,16 +28,9 @@ router.post('/', [validateBook], async (req: Request, res: Response) => {
   }
 })
 
-router.put('/:id', [validateBook], async (req: Request, res: Response) => {
-  const { id, title, image, description } = req.params
-
+router.put('/', [validateUpdate], async (req: Request, res: Response) => {
   try {
-    const result = await controller.updateBook(id, {
-      title,
-      image,
-      description,
-    })
-
+    const result = await controller.updateBook(req.body)
     return res.status(200).send(`Book ${result?.title} updated!`)
   } catch (error) {
     console.error(error)
@@ -46,7 +40,6 @@ router.put('/:id', [validateBook], async (req: Request, res: Response) => {
 
 router.delete('/:id', async (req: Request, res: Response) => {
   const id = req.params.id
-
   try {
     const result = await controller.removeBook(id)
     return res.status(200).send(`Book ${result?.title} deleted!`)

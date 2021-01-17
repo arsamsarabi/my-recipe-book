@@ -1,12 +1,24 @@
 import Joi from '@hapi/joi'
 
-const schema = Joi.object({
+const newBookSchema = Joi.object({
   title: Joi.string().min(2).max(50).required(),
   image: Joi.string(),
   description: Joi.string(),
-  userId: Joi.string().required(),
+  creator: Joi.string().required(),
 })
 
-const joiValidation = (book: any) => schema.validate(book)
+const validateNewBook = (book: any) => newBookSchema.validate(book)
 
-export default joiValidation
+const updateBookSchema = Joi.object({
+  _id: Joi.string().required(),
+  title: Joi.string().min(2).max(50),
+  image: Joi.string(),
+  description: Joi.string(),
+  users: Joi.array().items(Joi.string()),
+  recipes: Joi.array().items(Joi.string()),
+  creator: Joi.string(),
+})
+
+const validateUpdateBook = (book: any) => updateBookSchema.validate(book)
+
+export { validateNewBook, validateUpdateBook }

@@ -1,11 +1,10 @@
-import pick from 'lodash/pick'
+import omit from 'lodash/omit'
 
-import Book, { BookInterface } from '../../db/models/Book'
+import Book, { BookInterface, BookDocument } from '../../db/models/Book'
 
 const addBook = async (userId: string, requestData: BookInterface) => {
-  const newBook = pick(requestData, ['title', 'image', 'description'])
   const book = new Book({
-    ...newBook,
+    ...requestData,
     creator: userId,
   })
   await book.save()
@@ -17,10 +16,14 @@ const removeBook = async (id: string) => {
   return result
 }
 
-const updateBook = async (id: string, book: Partial<BookInterface>) => {
-  const result = await Book.findByIdAndUpdate(id, book, {
-    new: true,
-  })
+const updateBook = async (book: Partial<BookDocument>) => {
+  const result = await Book.findByIdAndUpdate(
+    book._id,
+    omit(book, ['_id', 'creator']),
+    {
+      new: true,
+    }
+  )
   return result
 }
 

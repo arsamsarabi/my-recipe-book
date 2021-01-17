@@ -23,6 +23,7 @@ const newRecipeSchema = Joi.object({
 const validateNewRecipe = (book: any) => newRecipeSchema.validate(book)
 
 const updateRecipeSchema = Joi.object({
+  _id: Joi.string().required(),
   title: Joi.string().min(2).max(50),
   ingredients: Joi.array().items(
     Joi.object({
