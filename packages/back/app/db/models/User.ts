@@ -16,6 +16,8 @@ export interface UserDocument extends UserInterface, Document {
   books: Types.Array<string>
   fullName: string
   generateAuthToken(): string
+  createdAt: string
+  updatedAt: string
 }
 
 export interface UserModel extends Model<UserDocument> {
@@ -73,14 +75,17 @@ const userSchema: Schema<UserDocument, UserModel> = new Schema(
 )
 
 userSchema.virtual('fullName').get(function (this: UserDocument) {
-  return this.firstName + this.lastName ? ` ${this.lastName}` : ''
+  const first = this.firstName
+  const last = this.lastName || ''
+  return `${first} ${last}`.trim()
 })
 
 userSchema.methods.generateAuthToken = function () {
   const userDataToSign = {
     _id: this._id,
-    name: this.fullName,
+    fullName: this.fullName,
     email: this.email,
+    avatar: this.avatar,
   }
   const token = jwt.sign(userDataToSign, config.get('jwtPrivateKey'))
   return token

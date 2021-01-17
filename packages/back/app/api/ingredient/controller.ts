@@ -1,9 +1,9 @@
-import pick from 'lodash/pick'
+// import pick from 'lodash/pick'
 
 import Ingredient, { IngredientInterface } from '../../db/models/Ingredient'
 
-const addIngredient = async (requestData: IngredientInterface) => {
-  const ingredient = new Ingredient(pick(requestData, ['name', 'image']))
+const addIngredient = async (requestData: Partial<IngredientInterface>) => {
+  const ingredient = new Ingredient(requestData)
   await ingredient.save()
   return ingredient
 }
@@ -20,6 +20,8 @@ const updateIngredient = async (
   const result = await Ingredient.findByIdAndUpdate(id, ingredient, {
     new: true,
   })
+
+  console.log(result)
   return result
 }
 

@@ -27,6 +27,7 @@
       {
         "args": "none"
       }
-    ]
+    ],
+    "no-unused-vars": "off"
   }
 }

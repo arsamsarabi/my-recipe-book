@@ -11,8 +11,6 @@ const mongooseConfig = {
   useFindAndModify: false,
 }
 
-console.log(dbUrl)
-
 mongoose
   .connect(dbUrl, mongooseConfig)
   .then(() => log(`Connected to MongoDB on ${dbUrl}`))

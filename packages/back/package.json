@@ -6,6 +6,7 @@
   "scripts": {
     "serve": "NODE_ENV=production node dist/index.js",
     "dev": "DEBUG=app:api ts-node-dev --respawn index.dev.ts",
+    "dev:debug": "ts-node-dev --respawn --debug index.dev.ts",
     "build": "yarn clean && tsc",
     "clean": "rimraf dist"
   },

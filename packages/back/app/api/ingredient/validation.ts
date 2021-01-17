@@ -1,11 +1,20 @@
 import Joi from '@hapi/joi'
 
-const schema = Joi.object({
+const newIngredientSchema = Joi.object({
   name: Joi.string().min(3).max(50).required(),
   image: Joi.string(),
-  userId: Joi.string().required(),
 })
 
-const joiValidation = (ingredient: any) => schema.validate(ingredient)
+const validateNewIngredient = (ingredient: any) =>
+  newIngredientSchema.validate(ingredient)
 
-export default joiValidation
+const updateIngredientSchema = Joi.object({
+  id: Joi.string(),
+  name: Joi.string().min(3).max(50),
+  image: Joi.string(),
+})
+
+const validateUpdateIngredient = (ingredient: any) =>
+  updateIngredientSchema.validate(ingredient)
+
+export { validateNewIngredient, validateUpdateIngredient }

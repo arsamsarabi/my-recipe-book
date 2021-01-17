@@ -2,20 +2,31 @@ import express, { Request, Response } from 'express'
 
 import { apiDebugger as log } from '../../utils/debuggers'
 import controller from './controller'
-import { validateIngredient } from './middlewares'
+import { validateNew, validateUpdate } from './middlewares'
 
 const router = express.Router()
 
 router.get('/', async (req: Request, res: Response) => {
-  const userId = req.params.userId
+  const userId = req.user?._id || ''
   const ingredients = await controller.getIngredients(userId)
-  res.send(ingredients)
+  return res.status(200).send({
+    ok: true,
+    data: ingredients,
+    message: ingredients.length
+      ? 'Ingredients successfully fetched!'
+      : 'No Ingredients recorded!',
+  })
 })
 
-router.post('/', [validateIngredient], async (req: Request, res: Response) => {
-  const { name, image, userId } = req.params
+router.post('/', [validateNew], async (req: Request, res: Response) => {
+  const { name, image } = req.body
+
   try {
-    const result = await controller.addIngredient({ name, image, userId })
+    const result = await controller.addIngredient({
+      name,
+      image,
+      userId: req.user?._id,
+    })
     return res.status(200).send(`Ingredient ${result.name} added!`)
   } catch (error) {
     log(error.message)
@@ -23,25 +34,17 @@ router.post('/', [validateIngredient], async (req: Request, res: Response) => {
   }
 })
 
-router.put(
-  '/:id',
-  [validateIngredient],
-  async (req: Request, res: Response) => {
-    const { id, name, image, userId } = req.params
+router.put('/:id', [validateUpdate], async (req: Request, res: Response) => {
+  const { id, ...rest } = req.body
 
-    try {
-      const result = await controller.updateIngredient(id, {
-        name,
-        image,
-        userId,
-      })
-      return res.status(200).send(`Ingredient ${result?.name} updated!`)
-    } catch (error) {
-      console.error(error)
-      return res.status(500).send('Unknown error')
-    }
+  try {
+    const result = await controller.updateIngredient(id, rest)
+    return res.status(200).send(`Ingredient ${result?.name} updated!`)
+  } catch (error) {
+    console.error(error)
+    return res.status(500).send('Unknown error')
   }
-)
+})
 
 router.delete('/:id', async (req: Request, res: Response) => {
   const id = req.params.id
