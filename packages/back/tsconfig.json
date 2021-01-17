@@ -18,9 +18,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
-    "paths": {
-      "#root/*": ["./app/*"]
-    }
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
   "include": ["./app"],
   "exclude": ["node_modules"]

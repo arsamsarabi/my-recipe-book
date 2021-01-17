@@ -3,6 +3,7 @@ import { Schema, Model, model, Document } from 'mongoose'
 export interface IngredientInterface {
   name: string
   image?: string
+  userId: string
 }
 
 export interface IngrediendDocument extends IngredientInterface, Document {}
@@ -25,6 +26,10 @@ export const ingredientSchema: Schema<
       type: String,
       required: false,
       tring: true,
+    },
+    userId: {
+      type: String,
+      required: true,
     },
   },
   {

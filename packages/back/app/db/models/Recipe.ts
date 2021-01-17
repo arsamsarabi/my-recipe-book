@@ -9,12 +9,14 @@ export interface RecipeInterface {
   title: string
   ingredients: Array<IngredientAmount>
   books: Array<string>
-  steps: string
-  tags: Array<string>
-  difficulty: number
-  prepTime: number
-  cookTime: number
-  serves: number
+  steps?: string
+  tags?: Array<string>
+  difficulty?: number
+  prepTime?: number
+  cookTime?: number
+  serves?: number
+  image?: string
+  description?: string
 }
 
 export interface RecipeDocument extends RecipeInterface, Document {
@@ -22,6 +24,7 @@ export interface RecipeDocument extends RecipeInterface, Document {
   books: Types.Array<string>
   tags: Types.Array<string>
   totalTime: number
+  creator: string
 }
 
 export interface RecipeModel extends Model<RecipeDocument> {}
@@ -37,11 +40,8 @@ const recipeSchema: Schema<RecipeDocument, RecipeModel> = new Schema(
     },
     ingredients: [
       {
-        type: {
-          ingredient: String,
-          amount: String,
-        },
-        required: true,
+        ingredient: String,
+        amount: String,
       },
     ],
     books: [
@@ -58,9 +58,23 @@ const recipeSchema: Schema<RecipeDocument, RecipeModel> = new Schema(
       },
     ],
     difficulty: Number,
-    prepTime: Number,
-    cookTime: Number,
+    prepTime: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
+    cookTime: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
     serves: Number,
+    creator: {
+      type: String,
+      required: false,
+    },
+    image: String,
+    description: String,
   },
   {
     timestamps: true,
@@ -68,7 +82,9 @@ const recipeSchema: Schema<RecipeDocument, RecipeModel> = new Schema(
 )
 
 recipeSchema.virtual('totalTime').get(function (this: RecipeDocument) {
-  return this.prepTime + this.cookTime
+  const prep = this.prepTime ? this.prepTime : 0
+  const cook = this.cookTime ? this.cookTime : 0
+  return prep + cook
 })
 
 const Recipe = model<RecipeDocument, RecipeModel>('Recipe', recipeSchema)

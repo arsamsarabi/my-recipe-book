@@ -5,17 +5,17 @@ import config from 'config'
 export interface UserInterface {
   firstName: string
   lastName?: string
-  username: string
   password: string
   email: string
   friends: Array<string>
   books: Array<string>
+  avatar?: string
 }
-
 export interface UserDocument extends UserInterface, Document {
   friends: Types.Array<string>
   books: Types.Array<string>
   fullName: string
+  generateAuthToken(): string
 }
 
 export interface UserModel extends Model<UserDocument> {
@@ -37,14 +37,6 @@ const userSchema: Schema<UserDocument, UserModel> = new Schema(
       minlength: 0,
       maxlength: 50,
       trim: true,
-    },
-    username: {
-      type: String,
-      unique: true,
-      required: true,
-      lowercase: true,
-      minlength: 0,
-      maxlength: 50,
     },
     password: {
       type: String,
@@ -70,6 +62,10 @@ const userSchema: Schema<UserDocument, UserModel> = new Schema(
         type: String,
       },
     ],
+    avatar: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,
