@@ -21,6 +21,7 @@ export const buildRecipeObjectToPost = (
   next: any
 ) => {
   const recipe: Partial<RecipeDocument> = {}
+  if (req.body._id) recipe._id = req.body._id
   if (req.body.title) recipe.title = req.body.title
   if (req.body.ingredients) recipe.ingredients = req.body.ingredients
   if (req.body.books) recipe.books = req.body.books

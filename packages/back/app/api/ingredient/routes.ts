@@ -34,11 +34,9 @@ router.post('/', [validateNew], async (req: Request, res: Response) => {
   }
 })
 
-router.put('/:id', [validateUpdate], async (req: Request, res: Response) => {
-  const { id, ...rest } = req.body
-
+router.put('/', [validateUpdate], async (req: Request, res: Response) => {
   try {
-    const result = await controller.updateIngredient(id, rest)
+    const result = await controller.updateIngredient(req.body)
     return res.status(200).send(`Ingredient ${result?.name} updated!`)
   } catch (error) {
     console.error(error)

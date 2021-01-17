@@ -40,14 +40,11 @@ router.post(
 )
 
 router.put(
-  '/:id',
+  '/',
   [validateUpdate, buildRecipeObjectToPost],
   async (req: Request, res: Response) => {
     try {
-      const result = await controller.updateRecipe(
-        req.params.id,
-        req.body.recipe
-      )
+      const result = await controller.updateRecipe(req.body.recipe)
       return res.status(200).send(`Recipe ${result?.title} updated!`)
     } catch (error) {
       console.error(error)

@@ -1,4 +1,6 @@
-import Recipe, { RecipeInterface } from '../../db/models/Recipe'
+import omit from 'lodash/omit'
+
+import Recipe, { RecipeInterface, RecipeDocument } from '../../db/models/Recipe'
 
 const addRecipe = async (userId: string, requestData: RecipeInterface) => {
   const recipe = new Recipe({
@@ -14,10 +16,14 @@ const removeRecipe = async (id: string) => {
   return result
 }
 
-const updateRecipe = async (id: string, recipe: Partial<RecipeInterface>) => {
-  const result = await Recipe.findByIdAndUpdate(id, recipe, {
-    new: true,
-  })
+const updateRecipe = async (recipe: Partial<RecipeDocument>) => {
+  const result = await Recipe.findByIdAndUpdate(
+    recipe._id,
+    omit(recipe, ['_id', 'creator']),
+    {
+      new: true,
+    }
+  )
 
   return result
 }

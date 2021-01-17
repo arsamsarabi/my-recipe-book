@@ -1,4 +1,9 @@
-import Ingredient, { IngredientInterface } from '../../db/models/Ingredient'
+import omit from 'lodash/omit'
+
+import Ingredient, {
+  IngredientInterface,
+  IngrediendDocument,
+} from '../../db/models/Ingredient'
 
 const addIngredient = async (requestData: Partial<IngredientInterface>) => {
   const ingredient = new Ingredient(requestData)
@@ -11,13 +16,14 @@ const removeIngredient = async (id: string) => {
   return result
 }
 
-const updateIngredient = async (
-  id: string,
-  ingredient: Partial<IngredientInterface>
-) => {
-  const result = await Ingredient.findByIdAndUpdate(id, ingredient, {
-    new: true,
-  })
+const updateIngredient = async (ingredient: Partial<IngrediendDocument>) => {
+  const result = await Ingredient.findByIdAndUpdate(
+    ingredient._id,
+    omit(ingredient, ['_id', 'creator']),
+    {
+      new: true,
+    }
+  )
 
   return result
 }
