@@ -1,5 +1,3 @@
-// import pick from 'lodash/pick'
-
 import Ingredient, { IngredientInterface } from '../../db/models/Ingredient'
 
 const addIngredient = async (requestData: Partial<IngredientInterface>) => {
@@ -21,7 +19,6 @@ const updateIngredient = async (
     new: true,
   })
 
-  console.log(result)
   return result
 }
 

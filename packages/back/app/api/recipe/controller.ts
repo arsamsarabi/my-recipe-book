@@ -1,23 +1,8 @@
-import pick from 'lodash/pick'
-
 import Recipe, { RecipeInterface } from '../../db/models/Recipe'
 
 const addRecipe = async (userId: string, requestData: RecipeInterface) => {
-  const newRecipe = pick(requestData, [
-    'title',
-    'ingredients',
-    'books',
-    'steps',
-    'tags',
-    'difficulty',
-    'prepTime',
-    'cookTime',
-    'serves',
-    'image',
-    'description',
-  ])
   const recipe = new Recipe({
-    ...newRecipe,
+    ...requestData,
     creator: userId,
   })
   await recipe.save()
@@ -33,6 +18,7 @@ const updateRecipe = async (id: string, recipe: Partial<RecipeInterface>) => {
   const result = await Recipe.findByIdAndUpdate(id, recipe, {
     new: true,
   })
+
   return result
 }
 

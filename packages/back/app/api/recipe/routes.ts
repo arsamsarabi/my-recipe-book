@@ -2,23 +2,33 @@ import express, { Request, Response } from 'express'
 
 import { apiDebugger as log } from '../../utils/debuggers'
 import controller from './controller'
-import { validateRecipe, buildRecipeObjectToPost } from './middlewares'
+import {
+  validateNew,
+  validateUpdate,
+  buildRecipeObjectToPost,
+} from './middlewares'
 
 const router = express.Router()
 
 router.get('/', async (req: Request, res: Response) => {
-  const userId = req.params.userId
-  const ingredients = await controller.getRecipes(userId)
-  res.send(ingredients)
+  const userId = req.user?._id || ''
+  const recipes = await controller.getRecipes(userId)
+  return res.status(200).send({
+    ok: true,
+    data: recipes,
+    message: recipes.length
+      ? 'Recipes successfully fetched!'
+      : 'No Recipes recorded!',
+  })
 })
 
 router.post(
   '/',
-  [validateRecipe, buildRecipeObjectToPost],
+  [validateNew, buildRecipeObjectToPost],
   async (req: Request, res: Response) => {
     try {
       const result = await controller.addRecipe(
-        req.params.userId,
+        req.user?._id as string,
         req.body.recipe
       )
       return res.status(200).send(`Recipe ${result.title} added!`)
@@ -31,7 +41,7 @@ router.post(
 
 router.put(
   '/:id',
-  [validateRecipe, buildRecipeObjectToPost],
+  [validateUpdate, buildRecipeObjectToPost],
   async (req: Request, res: Response) => {
     try {
       const result = await controller.updateRecipe(

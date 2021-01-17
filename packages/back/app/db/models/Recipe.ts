@@ -17,6 +17,7 @@ export interface RecipeInterface {
   serves?: number
   image?: string
   description?: string
+  creator: string
 }
 
 export interface RecipeDocument extends RecipeInterface, Document {
@@ -24,7 +25,6 @@ export interface RecipeDocument extends RecipeInterface, Document {
   books: Types.Array<string>
   tags: Types.Array<string>
   totalTime: number
-  creator: string
 }
 
 export interface RecipeModel extends Model<RecipeDocument> {}
