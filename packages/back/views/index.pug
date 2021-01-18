@@ -1,6 +1,23 @@
-html
+html 
   head
-    link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk", crossorigin="anonymous")
-    title= title
+    link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css",
+    rel="stylesheet",
+integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk",
+crossorigin="anonymous") 
+    link(href="/styles.css" rel="stylesheet") 
+    title="My Recipe Book" 
   body
-    h1= message
+    header(class="header container")
+      img(src="/logo.svg" class="logo" alt="My Recipe Book Logo")
+    
+    main(class="main")
+      .containr
+        h1="My Recipe Book"
+        .heroImages
+          img(src="/breakfast.svg" class="heroImage" alt="My Recipe Book Logo")
+          img(src="/cooking.svg" class="heroImage" alt="My Recipe Book Logo")
+          img(src="/eating.svg" class="heroImage" alt="My Recipe Book Logo")
+    
+    footer
+      
+

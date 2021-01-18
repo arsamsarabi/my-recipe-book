@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&family=Yusei+Magic&display=swap');
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 16px 0;
+}
+
+.logo {
+  width: 150;
+  height: auto;
+  margin-right: 2em;
+}
+
+.main {
+  background-color: skyblue;
+  padding: 2em 0;
+}
+
+.main h1 {
+  font-size: 3.5em;
+  text-align: center;
+  margin-bottom: 2em;
+  font-family: 'Yusei Magic';
+  color: darkslateblue;
+}
+
+.heroImages {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.heroImage {
+  width: 25%;
+}

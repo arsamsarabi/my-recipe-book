@@ -2,8 +2,8 @@
   "private": true,
   "name": "my-recipe-book",
   "scripts": {
-    "front": "yarn workspace front dev",
-    "back": "yarn workspace back dev",
+    "front": "yarn workspace my-recipe-book-front start",
+    "back": "yarn workspace my-recipe-book-back dev",
     "dev": "concurrently --kill-others-on-fail \"yarn back\"  \"yarn front\""
   },
   "workspaces": [
