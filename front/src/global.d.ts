@@ -23,3 +23,7 @@ declare type ThemeType = {
   palette: Palette
   typography: Typography
 }
+
+interface WithTheme {
+  theme: ThemeType
+}
