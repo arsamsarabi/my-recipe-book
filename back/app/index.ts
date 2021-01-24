@@ -3,6 +3,7 @@ import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import config from 'config'
+import cors from 'cors'
 
 import { appDebugger as log } from './utils'
 import routes from './routes'
@@ -16,6 +17,8 @@ if (!config.get('jwtPrivateKey')) {
 }
 
 const app = express()
+
+app.use(cors())
 
 app.set('view engine', 'pug')
 app.set('views', './views') // default path
