@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 const INITIAL_STATE = {
   data: null,
@@ -9,39 +9,29 @@ const INITIAL_STATE = {
 export const useApi = (apiCall: () => Promise<any>) => {
   const [state, setState] = useState(INITIAL_STATE)
 
-  useEffect(() => {
-    let cancelled = false
-    if (state.data || state.error) setState(INITIAL_STATE)
+  const call = useCallback(async () => {
+    try {
+      const {
+        data: { data },
+      } = await apiCall()
 
-    async function call() {
-      try {
-        const {
-          data: { data, ok },
-        } = await apiCall()
-
-        if (ok && !cancelled) {
-          setState({
-            data,
-            error: null,
-            loading: false,
-          })
-        }
-      } catch (error) {
-        console.error(error)
-        setState({
-          data: null,
-          error,
-          loading: false,
-        })
-      }
-    }
-
-    call()
-
-    return () => {
-      cancelled = true
+      setState({
+        data,
+        error: null,
+        loading: false,
+      })
+    } catch (error) {
+      setState({
+        data: null,
+        error,
+        loading: false,
+      })
     }
   }, [])
+
+  useEffect(() => {
+    call()
+  }, [call])
 
   return { loading: state.loading, data: state.data, error: state.error }
 }

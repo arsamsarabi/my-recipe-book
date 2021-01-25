@@ -1,24 +1,63 @@
-import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import React, { lazy, Suspense } from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
 
-import { Layout } from '../components'
+import { Layout, Loading } from '../components'
+import PrivateRoute from './PrivateRoute'
+import { useAuthContext } from '../context'
 
-export const AppRouter = () => {
+const Dashboard = lazy(() => import('../screens/Dashboard'))
+const Login = lazy(() => import('../screens/Login'))
+
+const AppRouter = () => {
+  const { user, isAuthenticated } = useAuthContext()
+
   return (
     <Router>
-      <Layout>
-        <Switch>
-          <Route path="/about">
-            <div>Hello about!</div>
-          </Route>
-          <Route path="/topics">
-            <div>Hello topics!</div>
-          </Route>
-          <Route path="/">
-            <div>Hello home!</div>
-          </Route>
-        </Switch>
-      </Layout>
+      <Suspense fallback={<Loading />}>
+        <Layout>
+          <Switch>
+            <PrivateRoute
+              path="/dashboard"
+              component={Dashboard}
+              user={user}
+              isAuthenticated={isAuthenticated}
+            />
+
+            <PrivateRoute
+              path="/about"
+              user={user}
+              isAuthenticated={isAuthenticated}
+            >
+              <div>Hello about!</div>
+            </PrivateRoute>
+
+            <PrivateRoute
+              path="/topics"
+              user={user}
+              isAuthenticated={isAuthenticated}
+            >
+              <div>Hello topics!</div>
+            </PrivateRoute>
+
+            <Route exact path="/">
+              <Redirect to="/dashboard" />
+            </Route>
+
+            <Route path="/register">
+              <div>Hello topics!</div>
+            </Route>
+
+            <Route path="/login" component={Login} />
+          </Switch>
+        </Layout>
+      </Suspense>
     </Router>
   )
 }
+
+export default AppRouter

@@ -87,7 +87,9 @@ userSchema.methods.generateAuthToken = function () {
     email: this.email,
     avatar: this.avatar,
   }
-  const token = jwt.sign(userDataToSign, config.get('jwtPrivateKey'))
+  const token = jwt.sign(userDataToSign, config.get('jwtPrivateKey'), {
+    expiresIn: '7d',
+  })
   return token
 }
 
