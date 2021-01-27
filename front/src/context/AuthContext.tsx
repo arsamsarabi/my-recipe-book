@@ -10,27 +10,34 @@ import React, {
 import { useToken } from '../hooks'
 import { sessionStorage } from '../utils'
 
-interface AuthContext {
+interface AuthState {
   user: null | object
   isAuthenticated: boolean
 }
 
-const initialContext: AuthContext = {
+type AuthContext = AuthState & {
+  // eslint-disable-next-line no-unused-vars
+  handleLogin: (token: string) => void
+  handleLogout: () => void
+}
+
+const initialState: AuthState = {
   user: null,
   isAuthenticated: false,
 }
 
-const AuthContext = createContext<AuthContext>(initialContext)
+const AuthContext = createContext<Partial<AuthContext>>({
+  ...initialState,
+  handleLogin: () => {},
+  handleLogout: () => {},
+})
 
 interface AuthProviderProps {
   children: ReactElement
 }
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const [state, setState] = useState<AuthContext>({
-    user: null,
-    isAuthenticated: false,
-  })
+  const [state, setState] = useState<AuthState>(initialState)
 
   const { token, expired } = useToken(sessionStorage.get('token'))
 
@@ -39,9 +46,25 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       user: token,
       isAuthenticated: Boolean(token) && !expired,
     })
-  }, [token, expired])
+  }, [])
 
-  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>
+  const value: AuthContext = {
+    ...state,
+    handleLogin: (token: string) => {
+      const { token: user } = useToken(token)
+      setState({
+        user,
+        isAuthenticated: true,
+      })
+    },
+    handleLogout: () =>
+      setState({
+        user: null,
+        isAuthenticated: false,
+      }),
+  }
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
 export const useAuthContext = () => useContext(AuthContext)

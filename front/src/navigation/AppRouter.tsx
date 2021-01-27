@@ -16,6 +16,8 @@ const Login = lazy(() => import('../screens/Login'))
 const AppRouter = () => {
   const { user, isAuthenticated } = useAuthContext()
 
+  console.log('isAuthenticated', isAuthenticated)
+
   return (
     <Router>
       <Suspense fallback={<Loading />}>
@@ -25,13 +27,13 @@ const AppRouter = () => {
               path="/dashboard"
               component={Dashboard}
               user={user}
-              isAuthenticated={isAuthenticated}
+              isAuthenticated={Boolean(isAuthenticated)}
             />
 
             <PrivateRoute
               path="/about"
               user={user}
-              isAuthenticated={isAuthenticated}
+              isAuthenticated={Boolean(isAuthenticated)}
             >
               <div>Hello about!</div>
             </PrivateRoute>
@@ -39,7 +41,7 @@ const AppRouter = () => {
             <PrivateRoute
               path="/topics"
               user={user}
-              isAuthenticated={isAuthenticated}
+              isAuthenticated={Boolean(isAuthenticated)}
             >
               <div>Hello topics!</div>
             </PrivateRoute>

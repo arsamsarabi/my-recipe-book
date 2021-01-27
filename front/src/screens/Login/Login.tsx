@@ -3,23 +3,26 @@ import { useHistory } from 'react-router-dom'
 
 import { login } from '../../api'
 import { sessionStorage } from '../../utils'
+import { useAuthContext } from '../../context'
 
 interface Login {}
 
 const Login: FC<Login> = (): ReactElement => {
+  const { handleLogin } = useAuthContext()
   const history = useHistory()
   const { REACT_APP_DEV_EMAIL, REACT_APP_DEV_PASSWORD } = process.env
 
   useEffect(() => {
-    async function handleLogin() {
+    async function logUserIn() {
       const { data } = await login(REACT_APP_DEV_EMAIL, REACT_APP_DEV_PASSWORD)
       if (data.ok) {
         sessionStorage.set('token', data.data)
+        handleLogin && handleLogin(data.data)
         history.push('/')
       }
     }
 
-    handleLogin()
+    logUserIn()
   }, [])
 
   console.log('login')
