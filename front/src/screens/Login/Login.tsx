@@ -1,16 +1,61 @@
-import React, { FC, ReactElement, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useState } from 'react'
+import {If} from '../../components/If'
 
-import { login } from '../../api'
-import { sessionStorage } from '../../utils'
-import { useAuthContext } from '../../context'
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import {useAuth} from "../../hooks/useAuth";
+import {Redirect, Route} from "react-router-dom";
 
-interface Login {}
+const { REACT_APP_DEV_EMAIL, REACT_APP_DEV_PASSWORD } = process.env
 
-const Login: FC<Login> = (): ReactElement => {
-  const { handleLogin } = useAuthContext()
-  const history = useHistory()
-  const { REACT_APP_DEV_EMAIL, REACT_APP_DEV_PASSWORD } = process.env
+const Login = () => {
+
+  const [email, setEmail] = useState<string>(REACT_APP_DEV_EMAIL || '')
+  const [password, setPassword] = useState<string>(REACT_APP_DEV_PASSWORD || '')
+  const {login, inFlight, isAuthenticated } = useAuth()
+
+  const handleLogin = () =>{
+    login({email, password})
+  }
+
+  if(isAuthenticated){
+    return (
+      <Redirect to='/dashboard'/>
+    )
+  }
+
+
+
+
+
+  return (
+    <div>
+      <h1>Login</h1>
+      <TextField required label="UserName" value={email} onChange={(e)=>setEmail(e.target.value)} />
+      <TextField required label="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+      <Button variant="contained" color="primary" onClick={handleLogin} disabled={inFlight} >
+        <If condition={inFlight}>
+          <CircularProgress
+            size={20}
+            style={{
+              color:'white'
+            }}
+          />
+        </If>
+        <If condition={!inFlight}>
+          LogIn
+        </If>
+      </Button>
+    </div>
+  )
+}
+
+export default Login
+
+
+
+/*
 
   useEffect(() => {
     async function logUserIn() {
@@ -26,13 +71,4 @@ const Login: FC<Login> = (): ReactElement => {
   }, [])
 
   console.log('login')
-
-  return (
-    <div>
-      <h1>Login</h1>
-      <p>User {REACT_APP_DEV_EMAIL} being logged in ...</p>
-    </div>
-  )
-}
-
-export default Login
+ */

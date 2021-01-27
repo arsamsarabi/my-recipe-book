@@ -1,8 +1,9 @@
 import axios from './axios'
 
-export const login = async (
-  email?: string,
-  password?: string,
-): Promise<any> => {
+export type loginCredentialsType = {
+  email: string,
+  password: string
+}
+export const postLogin = async ({email, password}: loginCredentialsType): Promise<any> => {
   return axios.post('/auth/login', { email, password })
 }

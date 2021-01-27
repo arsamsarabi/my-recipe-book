@@ -20,6 +20,7 @@
     "react-icons": "^4.1.0",
     "react-lottie": "^1.2.3",
     "react-router-dom": "^5.2.0",
+    "rxjs": "^6.6.3",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4",
     "yup": "^0.32.8"
