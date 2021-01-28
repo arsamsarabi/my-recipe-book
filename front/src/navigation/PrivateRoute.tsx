@@ -1,17 +1,15 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { Route, Redirect, RouteProps } from 'react-router-dom'
-import {useAuth} from "../hooks/useAuth";
+import { useAuth } from '../hooks/useAuth'
 
-const PrivateRoute = (props:RouteProps) => {
+const PrivateRoute = (props: RouteProps) => {
   const { isAuthenticated } = useAuth()
   if (isAuthenticated) {
-    console.log('isAuthenticated', isAuthenticated)
-    console.log(props)
-    return <Route {...props}/>
+    return <Route {...props} />
   }
 
   return (
-    <Route >
+    <Route>
       <Redirect to="/login" />
     </Route>
   )

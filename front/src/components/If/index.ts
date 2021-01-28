@@ -1,5 +1,3 @@
-import {If} from './If'
+import { If } from './If'
 
-export {
-	If
-}
+export { If }

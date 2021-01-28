@@ -1,10 +1,9 @@
 import React, { FC, ReactElement } from 'react'
 
 import { HeaderWrapper } from './styles'
-import Button from "@material-ui/core/Button";
-import {If} from "../If";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import {useAuth} from "../../hooks/useAuth";
+import Button from '@material-ui/core/Button'
+import { If } from '../If'
+import { useAuth } from '../../hooks/useAuth'
 
 export const Header: FC = (): ReactElement => {
   const { isAuthenticated, logout } = useAuth()
