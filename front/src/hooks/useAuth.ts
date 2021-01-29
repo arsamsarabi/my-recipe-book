@@ -31,7 +31,7 @@ export const useAuth = () => {
       return
     }
     setInFlight(true)
-    const response = await postLogin({ email, password })
+    const response = await  postLogin({ email, password })
     setInFlight(false)
     setToken(response?.data?.data)
   }
