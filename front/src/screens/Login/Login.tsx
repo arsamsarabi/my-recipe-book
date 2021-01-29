@@ -13,7 +13,7 @@ const { REACT_APP_DEV_EMAIL, REACT_APP_DEV_PASSWORD } = process.env
 const Login = () => {
   const [email, setEmail] = useState<string>(REACT_APP_DEV_EMAIL || '')
   const [password, setPassword] = useState<string>(REACT_APP_DEV_PASSWORD || '')
-  const { login, inFlight, isAuthenticated } = useAuth()
+  const { login, inFlight, isAuthenticated, error } = useAuth()
 
   const handleLogin = () => {
     login({ email, password })
@@ -26,6 +26,9 @@ const Login = () => {
   return (
     <div>
       <h1>Login</h1>
+      <If condition={error}>
+        {error}
+      </If>
       <TextField
         required
         label="UserName"
