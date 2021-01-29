@@ -37,15 +37,15 @@ export const useAuth = () => {
     }
   }
 
-  const handleLogout = () => {
+  const logout = () => {
     setToken({})
   }
 
   return {
     login,
-    logout: handleLogout,
-    inFlight,
+    logout,
     isAuthenticated,
+    inFlight,
     error,
   }
 }

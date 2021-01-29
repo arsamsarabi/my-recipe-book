@@ -5,7 +5,7 @@ export type tokenType = string | undefined
 export type tokenStoreType = {
   token?: tokenType,
   inFlight?: boolean,
-  error?: any
+  error?: Error
 }
 
 const authStore = {
