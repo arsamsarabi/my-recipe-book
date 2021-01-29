@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { loginCredentialsType, postLogin } from '../api'
 import jwt_decode, { JwtPayload } from 'jwt-decode'
 import authStore, { tokenType} from '../store/authStore'
-const { useTokenStore, useTokenInFlightStore } = authStore
+const { useTokenStore } = authStore
 
 const checkBearerToken = (token: tokenType) => {
-  if (typeof token !== 'string') {
+  if (!token) {
     return false
   }
   const current_time = new Date().getTime() / 1000
@@ -15,9 +15,7 @@ const checkBearerToken = (token: tokenType) => {
 
 export const useAuth = () => {
 
-  const [token, setToken] = useTokenStore()
-  const [inFlight, setInFlight] = useTokenInFlightStore()
-
+  const [{token, inFlight = false, error}, setToken] = useTokenStore()
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     checkBearerToken(token)
   )
@@ -30,14 +28,17 @@ export const useAuth = () => {
     if (inFlight) {
       return
     }
-    setInFlight(true)
-    const response = await  postLogin({ email, password })
-    setInFlight(false)
-    setToken(response?.data?.data)
+    try {
+      setToken({inFlight: true})
+      const response = await postLogin({email, password})
+      setToken({token:response?.data?.data})
+    }catch(err){
+      setToken({error:err.message})
+    }
   }
 
   const handleLogout = () => {
-    setToken(undefined)
+    setToken({})
   }
 
   return {
@@ -45,5 +46,6 @@ export const useAuth = () => {
     logout: handleLogout,
     inFlight,
     isAuthenticated,
+    error,
   }
 }

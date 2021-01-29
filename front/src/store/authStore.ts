@@ -1,11 +1,15 @@
 import {createGlobalState} from './helper'
 
 export type tokenType = string | undefined
-export type tokenInFlightType = boolean
+
+export type tokenStoreType = {
+  token?: tokenType,
+  inFlight?: boolean,
+  error?: any
+}
 
 const authStore = {
-  useTokenStore: createGlobalState<tokenType>(undefined),
-  useTokenInFlightStore: createGlobalState<tokenInFlightType>(false),
+  useTokenStore: createGlobalState<tokenStoreType>({}),
 }
 
 export default authStore
