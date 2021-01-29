@@ -1,8 +1,9 @@
 import { useState } from '@hookstate/core'
-import {StateMethods, StateMethodsDestroy} from '@hookstate/core/dist'
 
-export const useGlobalState =<T> (store:  StateMethods<T> & StateMethodsDestroy): [T,typeof store.set] => {
+// eslint-disable-next-line no-unused-vars
+// @ts-ignore
+export const useGlobalState =<S> (store: S): typeof store.value => {
   const state = useState(store)
 
-  return [state.get(), store.set]
+  return state.get()
 }

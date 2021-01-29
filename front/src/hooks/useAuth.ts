@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
 import { loginCredentialsType, postLogin } from '../api'
 import jwt_decode, { JwtPayload } from 'jwt-decode'
-import authStore, {tokenInFlightType, tokenType} from '../store/authStore'
-import { useGlobalState } from '../store/helper'
-
-const { tokenStore, tokenInFlightStore } = authStore
+import authStore, { tokenType} from '../store/authStore'
+const { useTokenStore, useTokenInFlightStore } = authStore
 
 const checkBearerToken = (token: tokenType) => {
   if (typeof token !== 'string') {
@@ -16,8 +14,9 @@ const checkBearerToken = (token: tokenType) => {
 }
 
 export const useAuth = () => {
-  const [token, setToken] = useGlobalState<tokenType>(tokenStore)
-  const [inFlight, setInFlight] = useGlobalState<tokenInFlightType>(tokenInFlightStore)
+
+  const [token, setToken] = useTokenStore()
+  const [inFlight, setInFlight] = useTokenInFlightStore()
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     checkBearerToken(token)
@@ -32,7 +31,7 @@ export const useAuth = () => {
       return
     }
     setInFlight(true)
-    const response = await  postLogin({ email, password })
+    const response = await postLogin({ email, password })
     setInFlight(false)
     setToken(response?.data?.data)
   }
