@@ -1,8 +1,6 @@
 const KEY_PREFIX = 'mrb-'
 
 export const set = (key: string, value: any) => {
-  console.log('key', key)
-  console.log('value', value)
   sessionStorage.setItem(`${KEY_PREFIX}${key}`, JSON.stringify(value))
 }
 

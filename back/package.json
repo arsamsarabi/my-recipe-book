@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "serve": "NODE_ENV=production node dist/index.js",
-    "dev": "DEBUG=app:api ts-node-dev --respawn index.dev.ts",
-    "dev:debug": "ts-node-dev --respawn --debug index.dev.ts",
+    "dev": "cross-env  DEBUG=app:api ts-node-dev --respawn index.dev.ts",
+    "dev:debug": "ts-node-dev --inspect --respawn --debug index.dev.ts ",
     "build": "yarn clean && tsc",
     "clean": "rimraf dist"
   },
@@ -41,6 +41,7 @@
     "@types/node": "^14.14.21",
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.13.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "eslint": "^7.18.0",
     "prettier": "^2.2.1",

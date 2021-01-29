@@ -6,11 +6,11 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
     "prettier",
-    "prettier/@typescript-eslint",
     "prettier/prettier",
-    "prettier/react"
+    "prettier/react",
+    "prettier/@typescript-eslint",
+    "plugin:@typescript-eslint/eslint-recommended"
   ],
   "globals": {
     "Atomics": "readonly",
