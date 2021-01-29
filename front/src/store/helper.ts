@@ -1,9 +1,10 @@
-import { useState } from '@hookstate/core'
+import { useState,createState } from '@hookstate/core'
 
-// eslint-disable-next-line no-unused-vars
-// @ts-ignore
-export const useGlobalState =<S> (store: S): typeof store.value => {
-  const state = useState(store)
-
-  return state.get()
+export const createGlobalState = <T>(defaultValue:T) =>{
+  const store = createState<T>(defaultValue)
+  // eslint-disable-next-line no-unused-vars
+  return ():[T,(newValue:T)=>void] =>{
+    const state = useState(store)
+    return [state.get(), state.set]
+  }
 }
