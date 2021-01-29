@@ -1,10 +1,9 @@
 import { createState } from '@hookstate/core'
 
-
-export type tokenType = string | undefined | Promise<string>
+export type tokenType = string | undefined
 
 const authStore = {
-  tokenStore: createState<tokenType>(undefined)
+  tokenStore: createState<tokenType>(undefined),
 }
 
 export default authStore

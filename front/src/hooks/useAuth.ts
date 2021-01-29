@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { loginCredentialsType, postLogin } from '../api'
 import jwt_decode, { JwtPayload } from 'jwt-decode'
-import authStore, {tokenType} from '../store/authStore'
+import authStore, { tokenType } from '../store/authStore'
 import { useGlobalState } from '../store/helper'
 
 const { tokenStore } = authStore
 
 const checkBearerToken = (token: tokenType) => {
-  if (typeof token !== "string") {
+  if (typeof token !== 'string') {
     return false
   }
   const current_time = new Date().getTime() / 1000
@@ -16,7 +16,8 @@ const checkBearerToken = (token: tokenType) => {
 }
 
 export const useAuth = () => {
-  const [token, setToken] = useGlobalState(tokenStore)
+  const [token, setToken] = useGlobalState<tokenType>(tokenStore)
+
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     checkBearerToken(token)
   )
@@ -29,7 +30,8 @@ export const useAuth = () => {
     if (token?.promised) {
       return
     }
-    setToken(postLogin({ email, password }).then(response => response?.data?.data))
+    const response = await  postLogin({ email, password })
+    setToken(response?.data?.data)
   }
 
   const handleLogout = () => {

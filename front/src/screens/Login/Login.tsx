@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { If } from '../../components/If'
-
+import { Redirect } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import CircularProgress from '@material-ui/core/CircularProgress'
+
 import { useAuth } from '../../hooks/useAuth'
-import { Redirect, Route } from 'react-router-dom'
+
+import { If } from '../../components/If'
 
 const { REACT_APP_DEV_EMAIL, REACT_APP_DEV_PASSWORD } = process.env
 
@@ -29,13 +30,13 @@ const Login = () => {
         required
         label="UserName"
         value={email}
-        onChange={(e:any) => setEmail(e.target.value)}
+        onChange={(e: any) => setEmail(e.target.value)}
       />
       <TextField
         required
         label="Password"
         value={password}
-        onChange={(e:any) => setPassword(e.target.value)}
+        onChange={(e: any) => setPassword(e.target.value)}
       />
       <Button
         variant="contained"
