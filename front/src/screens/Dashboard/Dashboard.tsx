@@ -1,10 +1,8 @@
-import React, { FC, ReactElement } from 'react'
+import React from 'react'
 
 import { Button } from '../../components'
 
-interface Dashboard {}
-
-const Dashboard: FC<Dashboard> = (): ReactElement => {
+const Dashboard = () => {
   return (
     <div>
       <h1>Dashboard</h1>
