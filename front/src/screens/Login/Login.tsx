@@ -26,9 +26,7 @@ const Login = () => {
   return (
     <div>
       <h1>Login</h1>
-      <If condition={!!error}>
-        {error}
-      </If>
+      <If condition={!!error}>{error}</If>
       <TextField
         required
         label="UserName"

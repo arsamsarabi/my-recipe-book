@@ -6,7 +6,7 @@ export type loginCredentialsType = {
 }
 
 type postLoginResponse = {
-  data?:{
+  data?: {
     data: string
   }
 }

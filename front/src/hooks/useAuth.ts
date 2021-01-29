@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { loginCredentialsType, postLogin } from '../api'
 import jwt_decode, { JwtPayload } from 'jwt-decode'
-import authStore, { tokenType} from '../store/authStore'
+import authStore, { tokenType } from '../store/authStore'
 const { useTokenStore } = authStore
 
 const checkBearerToken = (token: tokenType) => {
@@ -14,8 +14,7 @@ const checkBearerToken = (token: tokenType) => {
 }
 
 export const useAuth = () => {
-
-  const [{token, inFlight = false, error}, setToken] = useTokenStore()
+  const [{ token, inFlight = false, error }, setToken] = useTokenStore()
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     checkBearerToken(token)
   )
@@ -29,11 +28,11 @@ export const useAuth = () => {
       return
     }
     try {
-      setToken({inFlight: true})
-      const response = await postLogin({email, password})
-      setToken({token:response?.data?.data})
-    }catch(err){
-      setToken({error:err.message})
+      setToken({ inFlight: true })
+      const response = await postLogin({ email, password })
+      setToken({ token: response?.data?.data })
+    } catch (err) {
+      setToken({ error: err.message })
     }
   }
 
