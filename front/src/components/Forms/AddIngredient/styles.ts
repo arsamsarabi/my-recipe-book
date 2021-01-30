@@ -7,3 +7,9 @@ export const StyledForm = styled(Form)(() => {
     flex-direction: column;
   `
 })
+
+export const FormWrapper = styled.div(() => {
+  return css`
+    width: 600px;
+  `
+})

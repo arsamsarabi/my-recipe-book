@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const LayoutWrapper = styled.section<WithTheme>(() => {
+export const LayoutWrapper = styled.section(() => {
   return css`
     width: 100vw;
     background-color: 'hotpink';
@@ -9,6 +9,14 @@ export const LayoutWrapper = styled.section<WithTheme>(() => {
   `
 })
 
-export const Main = styled.main<WithTheme>(() => {
-  return css``
+export const Main = styled.main(() => {
+  return css`
+    display: flex;
+  `
+})
+
+export const Content = styled.section(() => {
+  return css`
+    margin: 0 auto;
+  `
 })

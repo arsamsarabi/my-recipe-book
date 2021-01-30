@@ -5,25 +5,12 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 
 import { addIngredient } from '../../../api'
-import { StyledForm } from './styles'
-
-const FILE_SIZE = 8192 * 8192
-const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png']
+import { ImagePicker } from '../../ImagePicker'
+import { StyledForm, FormWrapper } from './styles'
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required(),
-  image: Yup.mixed()
-    .required('A file is required')
-    .test(
-      'fileSize',
-      'File too large',
-      (value) => value && value.size <= FILE_SIZE
-    )
-    .test(
-      'fileFormat',
-      'Unsupported Format',
-      (value) => value && SUPPORTED_FORMATS.includes(value.type)
-    ),
+  name: Yup.string().label('Ingredient name').required(),
+  image: Yup.mixed(),
 })
 
 interface InitialFormValues {
@@ -66,57 +53,57 @@ export const AddIngredientForm = () => {
   }
 
   return (
-    <Formik
-      initialValues={{
-        name: '',
-        image: '',
-      }}
-      onSubmit={handleOnSubmit}
-      validateOnBlur
-      validationSchema={validationSchema}
-    >
-      {({
-        isValid,
-        errors,
-        touched,
-        values,
-        setFieldTouched,
-        setFieldValue,
-      }) => {
-        return (
-          <StyledForm>
-            <label htmlFor="name">Ingredient name</label>
-            <TextField
-              id="name"
-              name="name"
-              value={values.name}
-              placeholder="Ingredient name"
-              onBlur={() => setFieldTouched('name')}
-              onChange={(e) => handleNameChange(e, setFieldValue)}
-            />
-            {errors.name && touched.name ? <p>{errors.name}</p> : null}
+    <FormWrapper>
+      <Formik
+        initialValues={{
+          name: '',
+          image: '',
+        }}
+        onSubmit={handleOnSubmit}
+        validateOnBlur
+        validationSchema={validationSchema}
+      >
+        {({
+          isValid,
+          errors,
+          touched,
+          values,
+          setFieldTouched,
+          setFieldValue,
+        }) => {
+          return (
+            <StyledForm>
+              <label htmlFor="name">Ingredient name</label>
+              <TextField
+                id="name"
+                name="name"
+                value={values.name}
+                placeholder="Ingredient name"
+                onBlur={() => setFieldTouched('name')}
+                onChange={(e) => handleNameChange(e, setFieldValue)}
+              />
+              {errors.name && touched.name ? <p>{errors.name}</p> : null}
 
-            <label htmlFor="image">Ingredient image</label>
-            <TextField
-              id="image"
-              name="image"
-              type="file"
-              onBlur={() => setFieldTouched('image')}
-              onChange={(e) => handleImageChange(e, setFieldValue)}
-            />
-            {errors.image && touched.image ? <p>{errors.image}</p> : null}
+              <label htmlFor="image">Ingredient image</label>
+              <ImagePicker
+                name="image"
+                onBlur={() => setFieldTouched('image')}
+                onChange={(e) => handleImageChange(e, setFieldValue)}
+              />
+              {errors.image && touched.image ? <p>{errors.image}</p> : null}
 
-            <Button
-              type="submit"
-              disabled={!isValid}
-              color="primary"
-              variant="contained"
-            >
-              Submit
-            </Button>
-          </StyledForm>
-        )
-      }}
-    </Formik>
+              <Button
+                type="submit"
+                disabled={!isValid}
+                color="primary"
+                variant="contained"
+              >
+                Submit
+              </Button>
+            </StyledForm>
+          )
+        }}
+      </Formik>
+    </FormWrapper>
   )
 }

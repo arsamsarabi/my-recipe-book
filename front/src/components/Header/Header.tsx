@@ -1,7 +1,8 @@
 import React, { FC, ReactElement } from 'react'
+import Button from '@material-ui/core/Button'
+import LogoutIcon from '@material-ui/icons/ExitToApp'
 
 import { HeaderWrapper } from './styles'
-import Button from '@material-ui/core/Button'
 import { If } from '../If'
 import { useAuth } from '../../hooks/useAuth'
 
@@ -11,7 +12,8 @@ export const Header: FC = (): ReactElement => {
     <HeaderWrapper>
       <h1>My Recipe Book</h1>
       <If condition={isAuthenticated}>
-        <Button variant="contained" color="primary" onClick={logout}>
+        <Button variant="contained" color="secondary" onClick={logout}>
+          <LogoutIcon />
           Logout
         </Button>
       </If>

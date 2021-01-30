@@ -1,13 +1,12 @@
 import React from 'react'
 
-import { AddIngredientForm } from '../../components'
+import { ScreenContainer } from '../../components'
 
 const Dashboard = () => {
   return (
-    <div>
+    <ScreenContainer>
       <h1>Dashboard</h1>
-      <AddIngredientForm />
-    </div>
+    </ScreenContainer>
   )
 }
 

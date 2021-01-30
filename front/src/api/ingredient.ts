@@ -11,6 +11,10 @@ type AddIngredientResponse = {
   }
 }
 
+export const getIngredients = async () => {
+  return axios.get('/ingredient')
+}
+
 export const addIngredient = async (
   newIngredient: AddIngredientFormData,
   // eslint-disable-next-line no-unused-vars
