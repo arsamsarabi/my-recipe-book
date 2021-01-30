@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
 
-export const Wrapper = styled.header(({ theme: { palette, fonts } }) => {
+export const Wrapper = styled.div(({ theme: { palette, fonts } }) => {
   return css`
     width: 200px;
     height: 250px;
@@ -14,7 +14,7 @@ export const Wrapper = styled.header(({ theme: { palette, fonts } }) => {
     justify-content: space-between;
     align-items: center;
 
-    img {
+    figure {
       width: 150px;
       height: 150px;
       border-radius: 50%;

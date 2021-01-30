@@ -73,7 +73,6 @@ export const AddIngredientForm = () => {
         }) => {
           return (
             <StyledForm>
-              <label htmlFor="name">Ingredient name</label>
               <TextField
                 id="name"
                 name="name"
@@ -84,7 +83,6 @@ export const AddIngredientForm = () => {
               />
               {errors.name && touched.name ? <p>{errors.name}</p> : null}
 
-              <label htmlFor="image">Ingredient image</label>
               <ImagePicker
                 name="image"
                 onBlur={() => setFieldTouched('image')}

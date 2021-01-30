@@ -11,7 +11,7 @@ interface IngredientCardProps {
 export const IngredientCard = ({ name, image }: IngredientCardProps) => {
   return (
     <Wrapper>
-      {image && <AppImage name={name} path={image} />}
+      {image && <AppImage name={name} path={image} backgroundImage />}
       <h1>{name}</h1>
     </Wrapper>
   )

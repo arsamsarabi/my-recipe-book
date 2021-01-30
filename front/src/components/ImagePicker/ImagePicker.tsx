@@ -29,7 +29,7 @@ export const ImagePicker = ({ name, onBlur, onChange }: ImagePickerProps) => {
       />
       <Picker htmlFor={name}>Pick an Image</Picker>
       {image ? (
-        <Image src={image} />
+        <Image url={image} />
       ) : (
         <NoImage>
           <p>No image selected!</p>

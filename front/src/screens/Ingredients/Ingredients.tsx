@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button'
 import { ScreenContainer, IngredientCard } from '../../components'
 import { routes } from '../../navigation'
 import { getIngredients } from '../../api'
-import { Header } from './styles'
+import { Header, IngredientsWrapper } from './styles'
 
 const Ingredients = () => {
   const [ingredients, setIngredients] = useState([])
@@ -36,11 +36,11 @@ const Ingredients = () => {
           <AddIcon /> Add Ingredient
         </Button>
       </Header>
-      <div>
+      <IngredientsWrapper>
         {ingredients.map(({ name, image }) => (
           <IngredientCard key={`${name}-${image}`} name={name} image={image} />
         ))}
-      </div>
+      </IngredientsWrapper>
     </ScreenContainer>
   )
 }

@@ -8,6 +8,10 @@ export type ThemeType = {
   fonts: FontsType
 }
 
+export type WithTheme = {
+  theme: ThemeType
+}
+
 export const theme: ThemeType = {
   palette,
   fonts,

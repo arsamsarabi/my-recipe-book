@@ -14,3 +14,20 @@ export const Header = styled.div(({ theme: { fonts } }) => {
     }
   `
 })
+
+export const IngredientsWrapper = styled.div(() => {
+  return css`
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    &::after {
+      content: '';
+      flex: auto;
+    }
+    & > div {
+      margin: 8px;
+    }
+  `
+})

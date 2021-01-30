@@ -4,29 +4,25 @@ import {
 } from '@material-ui/core/styles/createPalette'
 import grey from '@material-ui/core/colors/grey'
 
+import { generateSimpleColorOptions } from './helpers'
+
 export type PaletteType = PaletteOptions & {
   primary: SimplePaletteColorOptions
   secondary: SimplePaletteColorOptions
+  danger: SimplePaletteColorOptions
+  success: SimplePaletteColorOptions
   black: string
   white: string
   snow: string
-  yellow: string
 }
 
 export const palette: PaletteType = {
-  primary: {
-    light: '#66b1e4',
-    main: '#3498db',
-    dark: '#1e73ac',
-  },
-  secondary: {
-    light: '#ed72ad',
-    main: '#e84393',
-    dark: '#c7186d',
-  },
+  primary: generateSimpleColorOptions('#fdcb6e'),
+  secondary: generateSimpleColorOptions('#e84393'),
+  danger: generateSimpleColorOptions('#eb4d4b'),
+  success: generateSimpleColorOptions('#2ecc71'),
   grey,
   black: '#212121',
   white: '#f1f1f1',
   snow: '#fff',
-  yellow: '#ffe598',
 }

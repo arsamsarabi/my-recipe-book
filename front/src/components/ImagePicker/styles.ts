@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import MuiTextField from '@material-ui/core/TextField'
-import { darken } from 'polished'
 
 export const TextField = styled(MuiTextField)(() => {
   return css`
@@ -21,27 +20,34 @@ export const Picker = styled.label(({ theme }) => {
     width: 250px;
     height: 50px;
     border-radius: 5px;
-    background-color: ${theme.palette.yellow};
+    background-color: ${theme.palette.primary.main};
     color: ${theme.palette.black};
     margin-bottom: 16px;
     font-size: 1.125rem;
     transition: 0.2s position linear;
-    box-shadow: 0 4px 2px -2px ${darken(0.2, theme.palette.yellow)};
+    margin-top: 16px;
 
     &:hover {
       cursor: pointer;
-      position: relative;
-      top: 4px;
-      box-shadow: none;
     }
   `
 })
 
-export const Image = styled.img(() => {
+type ImageProps = {
+  url: string
+}
+
+export const Image = styled.div<ImageProps>(({ url }) => {
   return css`
     width: 250px;
     height: 250px;
+    background-image: url(${url});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     border-radius: 5px;
+    margin-bottom: 16px;
   `
 })
 
@@ -54,6 +60,7 @@ export const NoImage = styled.div(({ theme }) => {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 16px;
     p {
       font-size: 1.25rem;
     }
