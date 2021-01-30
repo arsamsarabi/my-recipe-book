@@ -2,7 +2,7 @@ import { Schema, Model, model, Document } from 'mongoose'
 
 export interface IngredientInterface {
   name: string
-  image?: string
+  image?: any
   userId: string
 }
 

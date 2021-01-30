@@ -1,10 +1,12 @@
 import express, { Request, Response } from 'express'
+import multer from 'multer'
 
 import { apiDebugger as log } from '../../utils/debuggers'
 import controller from './controller'
 import { validateNew, validateUpdate } from './middlewares'
 
 const router = express.Router()
+const upload = multer({ dest: 'public/uploads/' })
 
 router.get('/', async (req: Request, res: Response) => {
   const userId = req.user?._id || ''
@@ -18,28 +20,30 @@ router.get('/', async (req: Request, res: Response) => {
   })
 })
 
-router.post('/', [validateNew], async (req: Request, res: Response) => {
-  const { name, image } = req.body
-
-  try {
-    const result = await controller.addIngredient({
-      name,
-      image,
-      userId: req.user?._id,
-    })
-    return res.status(200).send(`Ingredient ${result.name} added!`)
-  } catch (error) {
-    log(error.message)
-    return res.status(500).send('Unknown error')
+router.post(
+  '/',
+  [upload.single('image'), validateNew],
+  async (req: Request, res: Response) => {
+    try {
+      const result = await controller.addIngredient({
+        name: req.body.name,
+        image: req.file.filename,
+        userId: req.user?._id,
+      })
+      return res.status(200).send(`Ingredient ${result.name} added!`)
+    } catch (error) {
+      log(error)
+      return res.status(500).send('Unknown error')
+    }
   }
-})
+)
 
 router.put('/', [validateUpdate], async (req: Request, res: Response) => {
   try {
     const result = await controller.updateIngredient(req.body)
     return res.status(200).send(`Ingredient ${result?.name} updated!`)
   } catch (error) {
-    console.error(error)
+    log(error)
     return res.status(500).send('Unknown error')
   }
 })
@@ -51,7 +55,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
     const result = await controller.removeIngredient(id)
     return res.status(200).send(`Ingredient ${result?.name} deleted!`)
   } catch (error) {
-    console.error(error)
+    log(error)
     return res.status(500).send('Unknown error')
   }
 })

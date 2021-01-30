@@ -2,7 +2,7 @@ import Joi from '@hapi/joi'
 
 const newIngredientSchema = Joi.object({
   name: Joi.string().min(3).max(50).required(),
-  image: Joi.string(),
+  image: Joi.any(),
 })
 
 const validateNewIngredient = (ingredient: any) =>
@@ -11,7 +11,7 @@ const validateNewIngredient = (ingredient: any) =>
 const updateIngredientSchema = Joi.object({
   id: Joi.string(),
   name: Joi.string().min(3).max(50),
-  image: Joi.string(),
+  image: Joi.any(),
 })
 
 const validateUpdateIngredient = (ingredient: any) =>
