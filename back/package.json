@@ -8,7 +8,8 @@
     "dev": "cross-env  DEBUG=app:api ts-node-dev --respawn index.dev.ts",
     "dev:debug": "ts-node-dev --inspect --respawn --debug index.dev.ts ",
     "build": "yarn clean && tsc",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",

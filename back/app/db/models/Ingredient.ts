@@ -22,6 +22,10 @@ export const ingredientSchema: Schema<
       maxlength: 50,
       trim: true,
     },
+    calories: {
+      type: Number,
+      required: false,
+    },
     image: {
       type: String,
       required: false,

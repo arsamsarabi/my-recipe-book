@@ -3,6 +3,7 @@ import jwt_decode, { JwtPayload } from 'jwt-decode'
 
 import { loginCredentialsType, postLogin } from '../api'
 import authStore, { tokenType } from '../store/authStore'
+import { sessionStorage } from '../utils'
 
 const { useTokenStore } = authStore
 
