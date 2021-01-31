@@ -1,21 +1,23 @@
-import styled, { css } from 'styled-components'
+import { makeStyles } from '@material-ui/core/styles'
+import {
+  Theme as AugmentedTheme,
+} from '@material-ui/core/styles'
+import {darken, lighten} from 'polished'
 
-import { WithTheme } from '../../config/styles/theme'
+export const useStyles = makeStyles((theme: AugmentedTheme) =>{
 
-type BackgroundImageProps = WithTheme & {
-  url: string
-}
+  const borderColor = theme.palette.type === 'dark'? lighten(0.1,theme.palette.background.default) : darken(0.1,theme.palette.background.default)
 
-export const BackgroundImage = styled.figure<BackgroundImageProps>(
-  ({ theme: { palette }, url }) => {
-    return css`
-      width: 100%;
-      height: 100%;
-      background: ${palette.black};
-      background-image: url(${url});
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-    `
+  return {
+    backgroundImage: {
+      backgroundColor: theme.palette.background.default,
+    },
+    image:{
+      width: 150,
+      height: 150,
+      borderRadius: '50%',
+      objectFit: 'cover',
+      border: `1px solid ${borderColor}`
+    }
   }
-)
+})

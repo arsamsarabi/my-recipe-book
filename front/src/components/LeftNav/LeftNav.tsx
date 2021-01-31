@@ -1,25 +1,35 @@
 import React from 'react'
-
+import Button from '@material-ui/core/Button'
 import { useAuth } from '../../hooks'
-import { routes } from '../../navigation'
-import { Wrapper, NavItem } from './styles'
 import ListIcon from '../../resources/icons/outlined-white/list.svg'
 import GroceriesIcon from '../../resources/icons/outlined-white/groceries-basket.svg'
+import {useStyles} from './styles'
+import { useHistory } from 'react-router-dom'
+import {routesEnum} from '../../navigation'
 
 export const LeftNav = () => {
+  const history = useHistory()
   const { isAuthenticated } = useAuth()
+  const classes = useStyles()
+
 
   if (!isAuthenticated) return null
   return (
-    <Wrapper>
-      <NavItem to={routes.DASHBOARD}>
-        <img src={ListIcon} alt="dashboard" />
-        <p>Dashboard</p>
-      </NavItem>
-      <NavItem to={routes.INGREDIENTS}>
-        <img src={GroceriesIcon} alt="ingredients" />
-        <p>My Ingredients</p>
-      </NavItem>
-    </Wrapper>
+    <div className={classes.leftNav}>
+      <Button
+        color="secondary"
+        startIcon={ <img className={classes.image} src={ListIcon} alt="dashboard" />}
+        onClick={()=>history.push(routesEnum.DASHBOARD)}
+      >
+        Dashboard
+      </Button>
+      <Button
+        color="secondary"
+        startIcon={ <img className={classes.image} src={GroceriesIcon} alt="ingredients" />}
+        onClick={()=>history.push(routesEnum.INGREDIENTS)}
+      >
+        My Ingredients
+      </Button>
+    </div>
   )
 }

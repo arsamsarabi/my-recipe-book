@@ -1,2 +1,1 @@
-export { GlobalStyles } from './styles/globalStyles'
-export { theme, muiTheme } from './styles/theme'
+export { darkTheme } from './styles/themes/darkTheme'

@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField'
 
 import { addIngredient } from '../../../api'
 import { ImagePicker } from '../../ImagePicker'
-import { StyledForm, FormWrapper } from './styles'
+import {useStyles} from './styles'
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().label('Ingredient name').required(),
@@ -19,6 +19,9 @@ interface InitialFormValues {
 }
 
 export const AddIngredientForm = () => {
+
+  const classes =useStyles()
+
   const handleNameChange = (
     e: any,
     // eslint-disable-next-line no-unused-vars
@@ -53,7 +56,7 @@ export const AddIngredientForm = () => {
   }
 
   return (
-    <FormWrapper>
+    <div className={classes.formWrapper}>
       <Formik
         initialValues={{
           name: '',
@@ -72,7 +75,7 @@ export const AddIngredientForm = () => {
           setFieldValue,
         }) => {
           return (
-            <StyledForm>
+            <div className={classes.form}>
               <TextField
                 id="name"
                 name="name"
@@ -84,7 +87,6 @@ export const AddIngredientForm = () => {
               {errors.name && touched.name ? <p>{errors.name}</p> : null}
 
               <ImagePicker
-                name="image"
                 onBlur={() => setFieldTouched('image')}
                 onChange={(e) => handleImageChange(e, setFieldValue)}
               />
@@ -98,10 +100,10 @@ export const AddIngredientForm = () => {
               >
                 Submit
               </Button>
-            </StyledForm>
+            </div>
           )
         }}
       </Formik>
-    </FormWrapper>
+    </div>
   )
 }

@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import jwt_decode, { JwtPayload } from 'jwt-decode'
 
 import { loginCredentialsType, postLogin } from '../api'
-import authStore, { tokenType } from '../store/authStore'
+import authStore from '../store/authStore'
 
 const { useTokenStore } = authStore
 
-const checkBearerToken = (token: tokenType) => {
+const checkBearerToken = (token: string | undefined) => {
   if (!token) {
     return false
   }
