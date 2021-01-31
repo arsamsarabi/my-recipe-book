@@ -18,15 +18,6 @@ export const useStyles = makeStyles(() =>{
       flexFlow: 'row wrap',
       justifyContent: 'flex-start',
       alignItems: 'flex-start',
-      /*
-         &::after {
-          content: '';
-          flex: auto;
-        }
-        & > div {
-          margin: 8px;
-        }
-     */
     }
   }
 })

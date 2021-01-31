@@ -19,19 +19,3 @@ export const useStyles = makeStyles((theme: Theme) =>{
 
   }
 })
-
-
-/*
-  figure: {
-      width: 150,
-      height: 150,
-      borderRadius: '50%',
-      border: `1px solid ${rgba(theme.palette.primary.contrastText, 0.8)}`
-    },
-    h1 {
-      font-family: ${fonts.family.heading};
-      font-weight: ${fonts.weight.bold};
-      font-size: 1.125rem;
-      color: ${palette.white};
-    }
- */

@@ -16,14 +16,12 @@ const App = () => {
     themeToUse = lightTheme
   }
   return (
-    <>
-      <MuiThemeProvider theme={themeToUse}>
-        <>
-          <CssBaseline/>
-          <AppRouter />
-        </>
-      </MuiThemeProvider>
-    </>
+    <MuiThemeProvider theme={themeToUse}>
+      <>
+        <CssBaseline/>
+        <AppRouter />
+      </>
+    </MuiThemeProvider>
   )
 }
 

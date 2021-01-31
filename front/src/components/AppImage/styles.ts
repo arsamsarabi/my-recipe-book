@@ -6,7 +6,7 @@ import {darken, lighten} from 'polished'
 
 export const useStyles = makeStyles((theme: AugmentedTheme) =>{
 
-  const borderColor = theme.palette.type === 'dark'? lighten(0.1,theme.palette.background.paper) : darken(0.1,theme.palette.background.paper)
+  const borderColor = theme.palette.type === 'dark'? lighten(0.1,theme.palette.background.default) : darken(0.1,theme.palette.background.default)
 
   return {
     backgroundImage: {
