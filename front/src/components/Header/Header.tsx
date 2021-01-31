@@ -21,7 +21,6 @@ export const Header = () => {
 
   const checked = theme === themeEnum.DARK_THEME
   const handleDarkModeOnChange = () =>{
-    console.log('setTeme', checked ? themeEnum.LIGHT_THEME: themeEnum.DARK_THEME)
     setTheme(checked ? themeEnum.LIGHT_THEME: themeEnum.DARK_THEME)
   }
 

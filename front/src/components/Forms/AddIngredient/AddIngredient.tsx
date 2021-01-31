@@ -5,7 +5,8 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 
 import { addIngredient } from '../../../api'
-import { useStyles} from './styles'
+import { ImagePicker } from '../../ImagePicker'
+import {useStyles} from './styles'
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().label('Ingredient name').required(),
@@ -26,6 +27,14 @@ export const AddIngredientForm = () => {
     // eslint-disable-next-line no-unused-vars
     setFieldValue: (field: string, value: any) => void
   ) => setFieldValue('name', e.target.value)
+
+  const handleImageChange = (
+    e: any,
+    // eslint-disable-next-line no-unused-vars
+    setFieldValue: (field: string, value: any) => void
+  ) => {
+    setFieldValue('image', e.target.files[0])
+  }
 
   const handleOnSubmit = async (
     values: InitialFormValues,
@@ -77,7 +86,10 @@ export const AddIngredientForm = () => {
               />
               {errors.name && touched.name ? <p>{errors.name}</p> : null}
 
-
+              <ImagePicker
+                onBlur={() => setFieldTouched('image')}
+                onChange={(e) => handleImageChange(e, setFieldValue)}
+              />
               {errors.image && touched.image ? <p>{errors.image}</p> : null}
 
               <Button
@@ -95,20 +107,3 @@ export const AddIngredientForm = () => {
     </div>
   )
 }
-
-/*
-
-import { ImagePicker } from '../../ImagePicker'
-  const handleImageChange = (
-    e: any,
-    // eslint-disable-next-line no-unused-vars
-    setFieldValue: (field: string, value: any) => void
-  ) => {
-    setFieldValue('image', e.target.files[0])
-  }
- <ImagePicker
-                name="image"
-                onBlur={() => setFieldTouched('image')}
-                onChange={(e) => handleImageChange(e, setFieldValue)}
-              />
- */

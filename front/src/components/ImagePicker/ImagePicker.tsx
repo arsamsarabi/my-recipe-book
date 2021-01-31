@@ -1,33 +1,31 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React from 'react'
-
-export const ImagePicker = () =>{
-  return ImagePicker
-}
-/*
-import { TextField, Picker, Image, NoImage } from './styles'
-
+import React, {useState} from 'react'
+import Typography from '@material-ui/core/Typography'
+import {AppImage} from '../AppImage'
 type ImagePickerProps = {
-  name: string
-  // eslint-disable-next-line no-unused-vars
-  onChange?: (e: any) => void
-  // eslint-disable-next-line no-unused-vars
-  onBlur?: (e: any) => void
+  onChange: (e: any) => void
+  onBlur: (e: any) => void
 }
 
-export const ImagePicker = ({ name, onBlur, onChange }: ImagePickerProps) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const ImagePicker = ({ onChange , onBlur}: ImagePickerProps) => {
   const [image, setImage] = useState<string | null>(null)
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleChange = (e: any) => {
     setImage(URL.createObjectURL(e.target.files[0]))
-    onChange && onChange(e)
+    onChange(e)
   }
 
   return (
     <>
-      TODO
+      <Typography >Pick an Image</Typography>
+      {image ? (
+        <AppImage name='imagePicker' path={image} />
+      ) : (
+        <div>
+          <p>No image selected!</p>
+        </div>
+      )}
     </>
   )
 }
-
-*/
