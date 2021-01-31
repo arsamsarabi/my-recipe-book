@@ -9,7 +9,9 @@ export type tokenStoreType = {
 }
 
 const authStore = {
-  useTokenStore: createGlobalState<tokenStoreType>({}),
+  useTokenStore: createGlobalState<tokenStoreType>({
+    token: sessionStorage.getItem('token') || undefined
+  }),
 }
 
 export default authStore

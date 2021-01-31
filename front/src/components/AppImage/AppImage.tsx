@@ -4,7 +4,7 @@ import { IMAGES_BASE_URL } from '../../config/assetUrls'
 import { BackgroundImage } from './styles'
 interface AppImageProps {
   name: string
-  path: string
+  path?: string
   backgroundImage?: boolean
 }
 

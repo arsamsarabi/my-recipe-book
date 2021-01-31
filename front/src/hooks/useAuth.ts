@@ -3,7 +3,6 @@ import jwt_decode, { JwtPayload } from 'jwt-decode'
 
 import { loginCredentialsType, postLogin } from '../api'
 import authStore, { tokenType } from '../store/authStore'
-import { sessionStorage } from '../utils'
 
 const { useTokenStore } = authStore
 
@@ -34,16 +33,18 @@ export const useAuth = () => {
       setToken({ inFlight: true })
       const response = await postLogin({ email, password })
       setToken({ token: response?.data?.data })
-      sessionStorage.set('token', response?.data?.data)
+      if(response?.data?.data){
+        sessionStorage.setItem('token', response?.data?.data)
+      }
     } catch (err) {
       setToken({ error: err.message })
-      sessionStorage.remove('remove')
+      sessionStorage.removeItem('token')
     }
   }
 
   const logout = () => {
     setToken({})
-    sessionStorage.remove('remove')
+    sessionStorage.removeItem('token')
   }
 
   return {

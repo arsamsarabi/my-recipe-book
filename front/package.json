@@ -9,7 +9,8 @@
     "eject": "react-scripts eject",
     "prettier": "npx prettier --write .",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
     "@hookstate/core": "^3.0.3",
