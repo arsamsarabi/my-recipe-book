@@ -14,7 +14,7 @@ export const IngredientCard = ({ name, image }: IngredientCardProps) => {
   return (
     <div className={classes.wrapper}>
       <If condition={!!image}>
-        <AppImage name={name} path={image} backgroundImage />
+        <AppImage name={name} path={image} />
       </If>
       <h1 className={classes.title}>{name}</h1>
     </div>

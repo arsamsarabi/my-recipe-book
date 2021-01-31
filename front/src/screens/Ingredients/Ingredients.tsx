@@ -4,7 +4,7 @@ import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
 
 import { ScreenContainer, IngredientCard } from '../../components'
-import { routes } from '../../navigation'
+import { routesEnum } from '../../navigation'
 import { getIngredients } from '../../api'
 import { useStyles } from './styles'
 
@@ -32,7 +32,7 @@ const Ingredients = () => {
         <Button
           color="primary"
           variant="outlined"
-          onClick={() => history.push(routes.ADD_INGREDIENT)}
+          onClick={() => history.push(routesEnum.ADD_INGREDIENT)}
         >
           <AddIcon /> Add Ingredient
         </Button>

@@ -2,6 +2,7 @@ import React, { ReactElement, FC } from 'react'
 
 import { Header } from '../Header'
 import { LeftNav } from '../LeftNav'
+import Grid from '@material-ui/core/Grid'
 
 interface LayoutProps {
   children: ReactElement | ReactElement[]
@@ -9,12 +10,16 @@ interface LayoutProps {
 
 export const Layout: FC<LayoutProps> = ({ children }): ReactElement => {
   return (
-    <div>
-      <Header />
-      <div>
+    <Grid container>
+      <Grid item xs={12}>
+        <Header />
+      </Grid>
+      <Grid item xs={3}>
         <LeftNav />
-        <div>{children}</div>
-      </div>
-    </div>
+      </Grid>
+      <Grid item xs={9}>
+        {children}
+      </Grid>
+    </Grid>
   )
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 import { useAuth } from '../../hooks/useAuth'
@@ -25,13 +26,14 @@ const Login = () => {
 
   return (
     <ScreenContainer>
-      <h1>Login</h1>
+      <Typography variant="h5" gutterBottom color='textPrimary'>Login</Typography>
       <If condition={!!error}>{error}</If>
       <TextField
         required
         label="UserName"
         value={email}
         onChange={(e: any) => setEmail(e.target.value)}
+        type='primary'
       />
       <TextField
         required
@@ -45,6 +47,7 @@ const Login = () => {
         color="primary"
         onClick={handleLogin}
         disabled={inFlight}
+
       >
         <If condition={inFlight}>
           <CircularProgress
