@@ -1,18 +1,21 @@
 import styled, { css } from 'styled-components'
 
-export const HeaderWrapper = styled.header<WithTheme>(({ theme }) => {
-  const { palette } = theme
+export const HEADER_HEIGHT = '63px'
+
+export const HeaderWrapper = styled.header(({ theme: { palette } }) => {
   return css`
-    height: 48px;
-    background-color: ${palette.primary};
+    height: ${HEADER_HEIGHT};
+    background-color: ${palette.black};
     color: ${palette.white};
     padding: 0 16px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid ${palette.white};
 
     h1 {
       color: white;
+      font-size: 1.75rem;
     }
   `
 })

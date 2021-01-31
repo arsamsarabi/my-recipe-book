@@ -1,15 +1,12 @@
 import React from 'react'
 
-import { Button } from '../../components'
+import { ScreenContainer } from '../../components'
 
 const Dashboard = () => {
   return (
-    <div>
+    <ScreenContainer>
       <h1>Dashboard</h1>
-      <Button variant="outline" onClick={() => console.log('d')}>
-        Hi
-      </Button>
-    </div>
+    </ScreenContainer>
   )
 }
 

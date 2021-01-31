@@ -2,7 +2,7 @@ import { Schema, Model, model, Document } from 'mongoose'
 
 export interface IngredientInterface {
   name: string
-  image?: string
+  image?: any
   userId: string
 }
 
@@ -21,6 +21,10 @@ export const ingredientSchema: Schema<
       minlength: 3,
       maxlength: 50,
       trim: true,
+    },
+    calories: {
+      type: Number,
+      required: false,
     },
     image: {
       type: String,

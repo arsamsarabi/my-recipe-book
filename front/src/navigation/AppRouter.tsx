@@ -4,8 +4,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Layout, Loading } from '../components'
 import PrivateRoute from './PrivateRoute'
 import { ErrorBoundary } from '../components/ErrorBoundary'
+import { routes } from './routes'
 
 const Dashboard = lazy(() => import('../screens/Dashboard'))
+const Ingredients = lazy(() => import('../screens/Ingredients'))
+const AddIngredient = lazy(() => import('../screens/AddIngredient'))
 const Login = lazy(() => import('../screens/Login'))
 
 const AppRouter = () => {
@@ -15,17 +18,17 @@ const AppRouter = () => {
         <Suspense fallback={<Loading />}>
           <Layout>
             <Switch>
-              <PrivateRoute path="/dashboard">
+              <PrivateRoute path={routes.DASHBOARD}>
                 <Dashboard />
               </PrivateRoute>
-              <PrivateRoute path="/about">
-                <div>Hello about!</div>
+              <PrivateRoute path={routes.INGREDIENTS}>
+                <Ingredients />
               </PrivateRoute>
-              <PrivateRoute path="/topics">
-                <div>Hello topics!</div>
+              <PrivateRoute exact path={routes.ADD_INGREDIENT}>
+                <AddIngredient />
               </PrivateRoute>
-              <Route path="/register">
-                <div>Hello topics!</div>
+              <Route exact path={routes.REGISTER}>
+                <div>register screen goes here!</div>
               </Route>
               <Login />
             </Switch>

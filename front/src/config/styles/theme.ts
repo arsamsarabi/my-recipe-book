@@ -1,7 +1,20 @@
-import { palette } from './palette'
-import { typography } from './typography'
+import { createMuiTheme } from '@material-ui/core/styles'
+
+import { palette, PaletteType } from './palette'
+import { fonts, FontsType } from './fonts'
+
+export type ThemeType = {
+  palette: PaletteType
+  fonts: FontsType
+}
+
+export type WithTheme = {
+  theme: ThemeType
+}
 
 export const theme: ThemeType = {
   palette,
-  typography,
+  fonts,
 }
+
+export const muiTheme = createMuiTheme(theme)

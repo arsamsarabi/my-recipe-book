@@ -27,6 +27,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use(helmet())
+
 if (NODE_ENV === 'development') {
   app.use(morgan('tiny'))
 }

@@ -6,7 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 
 import { useAuth } from '../../hooks/useAuth'
 
-import { If } from '../../components/If'
+import { If, ScreenContainer } from '../../components/'
 
 const { REACT_APP_DEV_EMAIL, REACT_APP_DEV_PASSWORD } = process.env
 
@@ -24,7 +24,7 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <ScreenContainer>
       <h1>Login</h1>
       <If condition={!!error}>{error}</If>
       <TextField
@@ -37,6 +37,7 @@ const Login = () => {
         required
         label="Password"
         value={password}
+        type="password"
         onChange={(e: any) => setPassword(e.target.value)}
       />
       <Button
@@ -55,7 +56,7 @@ const Login = () => {
         </If>
         <If condition={!inFlight}>LogIn</If>
       </Button>
-    </div>
+    </ScreenContainer>
   )
 }
 
