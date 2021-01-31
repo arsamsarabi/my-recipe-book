@@ -1,5 +1,22 @@
-import styled, { css } from 'styled-components'
-import MuiTextField from '@material-ui/core/TextField'
+import { makeStyles} from '@material-ui/core/styles'
+export const useStyles = makeStyles(() =>{
+  return {
+    leftNav:{
+      width: 250,
+      padding: 32,
+      display: 'flex',
+      flexDirection: 'column'
+    },
+    navItem:{
+      display: 'flex',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+    }
+  }
+})
+
+/*
+
 
 export const TextField = styled(MuiTextField)(() => {
   return css`
@@ -66,3 +83,4 @@ export const NoImage = styled.div(({ theme }) => {
     }
   `
 })
+*/

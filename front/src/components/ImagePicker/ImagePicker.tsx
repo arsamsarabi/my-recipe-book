@@ -1,5 +1,10 @@
-import React, { useState } from 'react'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import React from 'react'
 
+export const ImagePicker = () =>{
+  return ImagePicker
+}
+/*
 import { TextField, Picker, Image, NoImage } from './styles'
 
 type ImagePickerProps = {
@@ -20,21 +25,9 @@ export const ImagePicker = ({ name, onBlur, onChange }: ImagePickerProps) => {
 
   return (
     <>
-      <TextField
-        id={name}
-        name={name}
-        type="file"
-        onBlur={onBlur}
-        onChange={handleChange}
-      />
-      <Picker htmlFor={name}>Pick an Image</Picker>
-      {image ? (
-        <Image url={image} />
-      ) : (
-        <NoImage>
-          <p>No image selected!</p>
-        </NoImage>
-      )}
+      TODO
     </>
   )
 }
+
+*/

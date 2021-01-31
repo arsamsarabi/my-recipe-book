@@ -1,15 +1,12 @@
-import styled, { css } from 'styled-components'
-import { Form } from 'formik'
-
-export const StyledForm = styled(Form)(() => {
-  return css`
-    display: flex;
-    flex-direction: column;
-  `
-})
-
-export const FormWrapper = styled.div(() => {
-  return css`
-    width: 600px;
-  `
+import { makeStyles} from '@material-ui/core/styles'
+export const useStyles = makeStyles(() =>{
+  return {
+    form:{
+      display: 'flex',
+      flexDirection: 'column'
+    },
+    formWrapper: {
+      width: 600
+    }
+  }
 })

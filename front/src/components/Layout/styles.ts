@@ -1,4 +1,8 @@
+
+export const test = 'test'
+/*
 import styled, { css } from 'styled-components'
+
 
 export const LayoutWrapper = styled.section(() => {
   return css`
@@ -20,3 +24,6 @@ export const Content = styled.section(() => {
     margin: 0 auto;
   `
 })
+
+
+ */

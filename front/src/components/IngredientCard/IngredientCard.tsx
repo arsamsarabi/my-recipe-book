@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { Wrapper } from './styles'
+import { useStyles } from './styles'
 import { AppImage } from '../AppImage'
+import {If} from '../If'
 
 interface IngredientCardProps {
   name: string
@@ -9,10 +10,13 @@ interface IngredientCardProps {
 }
 
 export const IngredientCard = ({ name, image }: IngredientCardProps) => {
+  const classes = useStyles()
   return (
-    <Wrapper>
-      {image && <AppImage name={name} path={image} backgroundImage />}
-      <h1>{name}</h1>
-    </Wrapper>
+    <div className={classes.wrapper}>
+      <If condition={!!image}>
+        <AppImage name={name} path={image} backgroundImage />
+      </If>
+      <h1 className={classes.title}>{name}</h1>
+    </div>
   )
 }

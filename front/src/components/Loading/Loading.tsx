@@ -1,14 +1,14 @@
-/* eslint-disable no-unused-vars */
-import React, { ReactElement, FC } from 'react'
+import React from 'react'
 
 import { LottieAnimation } from '../LottieAnimation'
-import { LoadingWrapper } from './styles'
+import { useStyles } from './styles'
 import animationData from '../../resources/animations/loading.json'
 
-export const Loading: FC = (): ReactElement => {
+export const Loading= () => {
+  const classes = useStyles()
   return (
-    <LoadingWrapper>
+    <div className={classes.wrapper}>
       <LottieAnimation lottie={animationData} />
-    </LoadingWrapper>
+    </div>
   )
 }

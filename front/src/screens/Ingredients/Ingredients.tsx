@@ -6,9 +6,10 @@ import Button from '@material-ui/core/Button'
 import { ScreenContainer, IngredientCard } from '../../components'
 import { routes } from '../../navigation'
 import { getIngredients } from '../../api'
-import { Header, IngredientsWrapper } from './styles'
+import { useStyles } from './styles'
 
 const Ingredients = () => {
+  const classes = useStyles()
   const [ingredients, setIngredients] = useState([])
   const history = useHistory()
 
@@ -26,7 +27,7 @@ const Ingredients = () => {
   }, [])
   return (
     <ScreenContainer>
-      <Header>
+      <div className={classes.header}>
         <h1>My Ingredients</h1>
         <Button
           color="primary"
@@ -35,12 +36,12 @@ const Ingredients = () => {
         >
           <AddIcon /> Add Ingredient
         </Button>
-      </Header>
-      <IngredientsWrapper>
+      </div>
+      <div className={classes.ingredientWrapper}>
         {ingredients.map(({ name, image }) => (
           <IngredientCard key={`${name}-${image}`} name={name} image={image} />
         ))}
-      </IngredientsWrapper>
+      </div>
     </ScreenContainer>
   )
 }

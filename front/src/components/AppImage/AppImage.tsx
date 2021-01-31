@@ -1,7 +1,9 @@
 import React from 'react'
 
 import { IMAGES_BASE_URL } from '../../config/assetUrls'
-import { BackgroundImage } from './styles'
+
+import {useStyles} from './styles'
+
 interface AppImageProps {
   name: string
   path?: string
@@ -13,9 +15,13 @@ export const AppImage = ({
   path,
   backgroundImage = false,
 }: AppImageProps) => {
+
+  const classes = useStyles()
+
   if (backgroundImage) {
-    return <BackgroundImage url={`${IMAGES_BASE_URL}${path}`} />
+    return <div style={{backgroundImage:`${IMAGES_BASE_URL}${path}`}} className={classes.backgroundImage}  />
   }
+
   return (
     <img src={`${IMAGES_BASE_URL}${path}`} alt={`ingredient ${name} image`} />
   )

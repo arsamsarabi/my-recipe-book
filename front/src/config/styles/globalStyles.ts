@@ -1,13 +1,12 @@
 import { createGlobalStyle, css } from 'styled-components'
 
-import { ThemeType } from './theme'
 import { resetCss } from './resetCss'
 
 interface GlobalStylesProps {
-  theme: ThemeType
+  theme: any
 }
 
-export const GlobalStyles = createGlobalStyle<GlobalStylesProps>(
+export const GlobalStyles_retired = createGlobalStyle<GlobalStylesProps>(
   ({ theme: { palette, fonts } }) => {
     return css`
       ${resetCss};

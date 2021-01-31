@@ -1,21 +1,12 @@
-import styled, { css } from 'styled-components'
+import { makeStyles, createStyles } from '@material-ui/core/styles'
+import {
+  Theme as AugmentedTheme,
+} from '@material-ui/core/styles'
 
-import { WithTheme } from '../../config/styles/theme'
-
-type BackgroundImageProps = WithTheme & {
-  url: string
-}
-
-export const BackgroundImage = styled.figure<BackgroundImageProps>(
-  ({ theme: { palette }, url }) => {
-    return css`
-      width: 100%;
-      height: 100%;
-      background: ${palette.black};
-      background-image: url(${url});
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-    `
-  }
+export const useStyles = makeStyles((theme: AugmentedTheme) =>
+  createStyles({
+    backgroundImage: {
+      backgroundColor: theme.palette.background.default,
+    },
+  }),
 )

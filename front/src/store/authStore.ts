@@ -1,9 +1,7 @@
 import { createGlobalState } from './helper'
 
-export type tokenType = string | undefined
-
 export type tokenStoreType = {
-  token?: tokenType
+  token?: string
   inFlight?: boolean
   error?: Error
 }

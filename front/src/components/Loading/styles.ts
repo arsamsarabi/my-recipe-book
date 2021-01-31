@@ -1,10 +1,11 @@
-import styled, { css } from 'styled-components'
-
-export const LoadingWrapper = styled.div(() => {
-  return css`
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `
+import { makeStyles} from '@material-ui/core/styles'
+export const useStyles = makeStyles(() =>{
+  return {
+    wrapper:{
+      height: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+  }
 })

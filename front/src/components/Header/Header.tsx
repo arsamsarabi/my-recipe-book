@@ -2,21 +2,23 @@ import React, { FC, ReactElement } from 'react'
 import Button from '@material-ui/core/Button'
 import LogoutIcon from '@material-ui/icons/ExitToApp'
 
-import { HeaderWrapper } from './styles'
+import { useStyles} from './styles'
 import { If } from '../If'
-import { useAuth } from '../../hooks/useAuth'
+import { useAuth } from '../../hooks'
 
 export const Header: FC = (): ReactElement => {
   const { isAuthenticated, logout } = useAuth()
+  const classes = useStyles()
+
   return (
-    <HeaderWrapper>
-      <h1>My Recipe Book</h1>
+    <div className={classes.header}>
+      <h1 className={classes.title}>My Recipe Book</h1>
       <If condition={isAuthenticated}>
         <Button variant="contained" color="secondary" onClick={logout}>
           <LogoutIcon />
           Logout
         </Button>
       </If>
-    </HeaderWrapper>
+    </div>
   )
 }

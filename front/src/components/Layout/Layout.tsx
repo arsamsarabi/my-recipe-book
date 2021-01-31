@@ -2,7 +2,6 @@ import React, { ReactElement, FC } from 'react'
 
 import { Header } from '../Header'
 import { LeftNav } from '../LeftNav'
-import { LayoutWrapper, Main, Content } from './styles'
 
 interface LayoutProps {
   children: ReactElement | ReactElement[]
@@ -10,12 +9,12 @@ interface LayoutProps {
 
 export const Layout: FC<LayoutProps> = ({ children }): ReactElement => {
   return (
-    <LayoutWrapper>
+    <div>
       <Header />
-      <Main>
+      <div>
         <LeftNav />
-        <Content>{children}</Content>
-      </Main>
-    </LayoutWrapper>
+        <div>{children}</div>
+      </div>
+    </div>
   )
 }
