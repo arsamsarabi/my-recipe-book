@@ -4,9 +4,6 @@
   "mail": {
     "host": "development-mail-server"
   },
-  "db": {
-    "url": "mongodb://localhost:27017/my-recipe-book"
-  },
   "const": {
     "authHeader": "x-dev-auth-header"
   }
