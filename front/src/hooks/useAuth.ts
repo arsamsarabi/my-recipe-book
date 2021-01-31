@@ -37,13 +37,13 @@ export const useAuth = () => {
       sessionStorage.set('token', response?.data?.data)
     } catch (err) {
       setToken({ error: err.message })
-      sessionStorage.remove('remove')
+      sessionStorage.remove('token')
     }
   }
 
   const logout = () => {
     setToken({})
-    sessionStorage.remove('remove')
+    sessionStorage.remove('token')
   }
 
   return {
