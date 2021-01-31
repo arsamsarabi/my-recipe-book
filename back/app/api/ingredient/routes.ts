@@ -27,7 +27,7 @@ router.post(
     try {
       const result = await controller.addIngredient({
         name: req.body.name,
-        image: req.file.filename,
+        image: req.file?.filename ?? null,
         userId: req.user?._id,
       })
       return res.status(200).send(`Ingredient ${result.name} added!`)
